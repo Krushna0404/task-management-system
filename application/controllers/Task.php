@@ -69,4 +69,11 @@ class Task extends CI_Controller {
 		}
 		echo json_encode($id);
 	}
+
+	public function register()
+	{
+		print_r('hi');
+		exit;
+		// $this->load->view('register');
+	}
 }

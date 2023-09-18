@@ -17,10 +17,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">Task Management System</a>
+				<button type="button" class="btn btn-outline-dark" >Log out</button>
 			</div>
 		</nav>
 		<div class="container">
-
+<hr>
 <!-- Button trigger modal -->
 <div class="row text-end">
 	<div class="col">
