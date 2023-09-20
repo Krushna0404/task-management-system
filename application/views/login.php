@@ -65,8 +65,17 @@ a {
 </head>
 <body>
 
+<?php $danger_flash = $this->session->flashdata('danger'); ?>
+<?php if (isset($danger_flash)): ?>
+    <div class="alert alert-danger">
+        <?php echo $danger_flash; ?>
+    </div>
+<?php endif; ?>
+
+
+
 <?php
-        echo form_open('register/save', [ 'class' => 'form-validate', 'autocomplete' => 'off' ]);
+        echo form_open('login/check', [ 'class' => 'form-validate', 'autocomplete' => 'off' ]);
             // echo form_open_multipart(['enctype="multipart/form-data" class=form-validate autocomplete=off' ]);
         ?>
   <div class="container">
@@ -79,7 +88,7 @@ a {
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
-    <button type="button" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="btn btn-primary">Sign in</button>
   </div>
   
   <div class="container signin">
