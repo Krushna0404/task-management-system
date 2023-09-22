@@ -70,15 +70,30 @@ a {
     <div class="alert alert-danger">
         <?php echo $danger_flash; ?>
     </div>
+    <?php
+    // Unset the flashdata after displaying it
+    $this->session->unset_userdata('danger');
+    ?>
 <?php endif; ?>
 
-
+<?php $flash = $this->session->flashdata('success'); ?>
+<?php if (isset($flash)): ?>
+    <div class="alert alert-success">
+        <?php echo $flash; ?>
+    </div>
+    <?php
+    // Unset the flashdata after displaying it
+    $this->session->unset_userdata('success');
+    ?>
+<?php endif; ?>
 
 <?php
         echo form_open('login/check', [ 'class' => 'form-validate', 'autocomplete' => 'off' ]);
-            // echo form_open_multipart(['enctype="multipart/form-data" class=form-validate autocomplete=off' ]);
         ?>
   <div class="container">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
     <h1>Log in</h1>
     <hr>
 
@@ -89,10 +104,14 @@ a {
     <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
     <button type="submit" class="btn btn-primary">Sign in</button>
+    <br>
+    <br>
+    <div class="container signin">
+      <p>Don't have an account? <a href="<?php base_url()?>register">Register</a>.</p>
+    </div>
   </div>
-  
-  <div class="container signin">
-    <p>Don't have an account? <a href="<?php base_url()?>register">Register</a>.</p>
+
+  </div>
   </div>
   <?php
 						echo form_close();

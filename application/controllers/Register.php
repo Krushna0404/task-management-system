@@ -11,6 +11,7 @@ class Register extends CI_Controller {
 		$this->load->model('Register_model', 'register_model');
 		$this->load->helper('form');
 		$this->load->helper('url');
+		$this->load->library('session');
     }
 
 
@@ -22,9 +23,6 @@ class Register extends CI_Controller {
     public function save()
 	{
 		$data = $_POST;		
-		// echo '<pre>';
-		// print_r($data);
-		// exit;
 		$id = $this->register_model->create([
 			'fullname' => $data['fullname'],
 			'email' => $data['email'],
@@ -35,7 +33,9 @@ class Register extends CI_Controller {
 		]);		
 		
 		if($id){
-			redirect('login','refresh');
+			$this->session->set_flashdata('success', 'Registration Successful, Please Login! ');
+
+			redirect('login');
 		}
 	}
 	

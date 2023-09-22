@@ -20,7 +20,9 @@ class Task_model extends CI_Model  {
     }
     public function update($id, $data)
     {
-        $this->db->where("id", $id)->update('tasks', $data);
+       $id = $this->db->where("id", $id)->update('tasks', $data);
+    //    print_r($this->db->last_query());
+    //    exit;
         return $this->db->insert_id();
     }
    

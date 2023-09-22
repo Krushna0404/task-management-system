@@ -23,7 +23,7 @@
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">Task Management System</a>
-				<button type="button" class="btn btn-outline-dark" >Log out</button>
+				<a href="<?php echo base_url()?>logout"><button type="button" class="btn btn-outline-dark" >Log out</button></a>
 			</div>
 		</nav>
 		<div class="spinner-border" role="status">
@@ -119,8 +119,8 @@
 			<!-- End - table -->
 		</div>
 		
-		<!-- <script src="<?php base_url()?>assets/js/bootstrap.bundle.min.js"></script> -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+		<script src="<?php base_url()?>assets/js/bootstrap.bundle.min.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
 		<script src="<?php base_url()?>assets/js/jquery.min.js"></script>
 		<script>
     		let base_url_task = "<?php echo base_url('task/list'); ?>";
@@ -156,12 +156,16 @@
 						dataType: "json",
 						success: function (response) {
 							$("#result").html(response.message);
+				list();
+
 						},
 						error: function (xhr, status, error) {
 							console.error(xhr.responseText);
 						}
 					});
 					$('#addModal').modal('hide');
+					$('#addModal input').val('');
+					$('#addModal textarea').val('');
 				}
 				$(".spinner-border").hide();
 				list();
@@ -236,8 +240,8 @@
 							id: $("#edit_id").val(),
 							title: $("#edit_title").val(),
 							description: $("#edit_description").val(),
-							is_done: 0,
-							is_deleted: is_deleted,
+							// is_done: 0,
+							// is_deleted: is_deleted,
 					}
 				}
 				else if(is_deleted == 1)
@@ -263,6 +267,8 @@
                     success: function (response) {
                         $("#result").html(response.message);
 						$('#editModal').modal('hide');
+				list();
+
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);

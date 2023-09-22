@@ -16,8 +16,14 @@ class Task extends CI_Controller {
 
 	public function index()
 	{
-		
-		$this->load->view('task');
+		if($this->session->userdata('id')){
+			// echo "asdfghjkl";
+			// exit;
+			$this->load->view('task');
+		}
+		else{
+			redirect('login','refresh');
+		}
 	}
 
 	public function list()
@@ -44,6 +50,9 @@ class Task extends CI_Controller {
 	public function update()
 	{
 		$data = $_POST;
+		// echo '<pre>';
+		// print_r($data);
+		// exit;
 		if(isset($data['is_deleted']) && $data['is_deleted'] == 1)
 		{
 			$id = $this->task_model->update($data['id'], [
@@ -51,30 +60,27 @@ class Task extends CI_Controller {
 				'is_deleted' => $data['is_deleted']
 			]);
 		}
-		else if(isset($data['is_done']) && $data['is_done'] == 1 || $data['is_done'] == 0)
+		else if(isset($data['is_done']) )
 		{
+			if($data['is_done'] == 1 || $data['is_done'] == 0){
 			$id = $this->task_model->update($data['id'], [
 				'updated_at' => date('Y-m-d H:i:s'),
 				'is_done' => $data['is_done']
 			]);
+			}
 		}
 		else{
 
 			$id = $this->task_model->update($data['id'], [
 				'title' => $data['title'],
 				'description' => $data['description'],
-				'is_done' => $data['is_done'],
 				'updated_at' => date('Y-m-d H:i:s'),
-				'is_deleted' => $data['is_deleted']
 			]);		
 		}
-		echo json_encode($id);
-	}
 
-	public function register()
-	{
-		print_r('hi');
-		exit;
-		// $this->load->view('register');
+		// echo '<pre>';
+		// print_r($id);
+		// exit;
+		echo json_encode($id);
 	}
 }

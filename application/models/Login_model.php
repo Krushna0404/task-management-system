@@ -48,5 +48,19 @@ class Login_model extends CI_Model  {
 		return false;
 
 	}
+
+	public function login($row){
+		$array = [
+			'id' => $row->id,
+			'fullname' => $row->fullname,
+			'email' => $row->email
+		];
+
+		$this->session->set_userdata( $array );
+
+		// echo '<pre>';
+		// print_r($array);
+		// exit;
+	}
    
 }

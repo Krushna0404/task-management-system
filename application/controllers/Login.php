@@ -13,6 +13,12 @@ class Login extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('session');
 
+		if($this->session->userdata('id')){
+			// echo "asdfghjkl";
+			// exit;
+			redirect('task','refresh');
+		}
+		
     }
 
 
@@ -31,8 +37,15 @@ class Login extends CI_Controller {
 
 		if($attempt == 'valid')
 		{
-			redirect('task');
-			$this->session->set_userdata('uname', $username);
+			$user = $this->db->where( 'email', $username )->order_by('id','desc')->get('users')->row();
+        	$this->login_model->login($user);
+			
+			// echo '<pre>';
+			// print_r($user);
+			// exit;
+
+			// redirect('task');
+			// $this->session->set_userdata('uname', $username);
 		}
 		else{
 			$this->session->set_flashdata('danger', $attempt);
@@ -41,6 +54,14 @@ class Login extends CI_Controller {
 			redirect('login'); 
 		}
 
+        redirect('task','refresh');
+
+	}
+
+	public function logout(){
+		// $this->session->sess_destroy();
+		echo 'hi';
+		exit;
 	}
 	
 }
